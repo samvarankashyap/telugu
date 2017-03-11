@@ -1,0 +1,25 @@
+{
+    "padalu": 4,
+    "ganalu": {
+        "base": 3,
+        "sari": 5
+    }
+    "allowed": "gaga,bha,ja,sa,nala",
+    "positional":{
+        "6": ["nala", "ja"]
+    }
+    "positional_not":{
+        "1": ["ja"],
+        "3": ["ja"],
+        "5": ["ja"],
+        "7": ["ja"]
+    }
+    "yeti": {
+        "2": {
+            "1.1": "4.1"
+        }
+        "4": {
+            "1.1": "4.1"
+        }
+    }
+}
