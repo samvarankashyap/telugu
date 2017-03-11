@@ -1,10 +1,7 @@
 <!doctype html>
-<title>Hello from Flask</title>
-{% if name %}
-  <h1>Hello {{ name }}!</h1>
-{% else %}
-  <h1>Hello World!</h1>
-{% endif %}
+<head>
+<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+<title>Plagio</title>
 <script src="/js/jquery.js"></script>
 
 <!-- Latest compiled and minified CSS -->
@@ -15,32 +12,95 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-
 <script>
 
-function highlight(text)
-{
-    inputText = document.getElementById("inputText")
-    var innerHTML = inputText.innerHTML
-    var index = innerHTML.indexOf(text);
-    if ( index >= 0 )
-    { 
-        innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-        inputText.innerHTML = innerHTML 
-    }
 
-}
+$(document).ready(function() {
+         
+
+           $('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	   });
+
+});
+
 </script>
-
-<button onclick="highlight('fox')">Highlight</button>
-
 <style>
-.highlight
-{
-background-color:yellow;
-}
-</style>
+               body{
+			margin-top: 100px;
+			font-family: 'Trebuchet MS', serif;
+			line-height: 1.6
+		}
+		.container{
+			width: 90%;
+			margin: 0 auto;
+		}
 
-<div id="inputText">
-The fox went over the fence
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #ededed;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #ededed;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+
+</style>
+</head>
+<body>
+<h1 align="center">Welcome</h1>
+<!-- container -->
+<div class="container">
+
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">Upload</li>
+		<li class="tab-link" data-tab="tab-2">Check</li>
+		<li class="tab-link" data-tab="tab-3">Test</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+        This is tab1
+	</div>
+	<div id="tab-2" class="tab-content">
+        This is tab2
+	</div>
+	<div id="tab-3" class="tab-content">
+         This is tab3 
+        </div>
+
 </div>
+<!-- container -->
+
+<body>
+</html>
+
+
+
+
