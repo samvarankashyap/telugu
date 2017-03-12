@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import Flask, request, send_from_directory
-
+from text_processor import *
 
 app = Flask(__name__,static_url_path='/static')
 
@@ -20,6 +20,11 @@ def send_css(path):
 @app.route('/')
 def index():
     return render_template('hello.html')
+
+@app.route('/gethtml')
+def get_html():
+    html = call_for_data()
+    return html
 
 
 ip = os.getenv("IP", "0.0.0.0")

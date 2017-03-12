@@ -1,7 +1,7 @@
 <!doctype html>
 <head>
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
-<title>Plagio</title>
+<title>Welcome</title>
 <script src="/js/jquery.js"></script>
 
 <!-- Latest compiled and minified CSS -->
@@ -27,6 +27,12 @@ $(document).ready(function() {
 		$(this).addClass('current');
 		$("#"+tab_id).addClass('current');
 	   });
+           $("#content_btn").click(function(){
+                $.get("/gethtml", function(data, status){
+                     console.log("Data: " + data + "\nStatus: " + status);
+                     $("#content").html(data);
+                });
+           });
 
 });
 
@@ -67,10 +73,19 @@ $(document).ready(function() {
 			background: #ededed;
 			padding: 15px;
 		}
-
 		.tab-content.current{
 			display: inherit;
 		}
+                table, td, th {
+                        border: 1px solid black;
+                }
+                table {
+                        border-collapse: collapse;
+                        width: 100%;
+                }
+                th {
+                        height: 50px;
+                }
 
 </style>
 </head>
@@ -87,6 +102,9 @@ $(document).ready(function() {
 
 	<div id="tab-1" class="tab-content current">
         This is tab1
+        <input type="button" id="content_btn" class="btn" value="Click Me">
+        <div id="content">
+        </div>
 	</div>
 	<div id="tab-2" class="tab-content">
         This is tab2

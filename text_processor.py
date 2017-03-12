@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import sys
 import codecs
 import unicodedata
+from tabulate import tabulate
 
 GURU_LABELS =  ["AA", "AI", "EE", "OO", "II", "AU", "RR", "LL"]
 
@@ -12,10 +14,8 @@ def gana_vibhajana(padyam):
     chars = []
     cur_char = []
     for line in lines:
-        print line
         for c in line:
             unicode_name = unicodedata.name(c)
-            print unicode_name
             if "LETTER" in unicode_name:
                 if v:
                     v = False
@@ -24,8 +24,6 @@ def gana_vibhajana(padyam):
                 ganas.append("I")
                 cur_char = []
                 chars.append(cur_char)
-                print "".join(cur_char)
-                #cur_chars = []
                 cur_char.append(c)
             if "VOWEL" in unicode_name:
                 label = unicode_name.split()[-1]
@@ -45,12 +43,14 @@ def gana_vibhajana(padyam):
                 ganas.append("U")
                 cur_char.append(c)
     for ch in chars:
-        print "".join(ch)
-    return ganas
+    chars = ["".join(x) for x in chars]
+    return zip(chars, ganas)
 
-text = open("samples/kandam_sample.txt","r").read()
-f = codecs.open("samples/kandam_sample.txt", "r", "utf-8")
-lines = f.read()
-gana_dict =  gana_vibhajana(lines)
-#print "".join(lines.split("\n"))
-print gana_dict
+def call_for_data():
+    text = open("samples/kandam_sample.txt","r").read()
+    f = codecs.open("samples/kandam_sample.txt", "r", "utf-8")
+    lines = f.read()
+    gana_tuple =  gana_vibhajana(lines)
+    table = [[ x[1] for x in gana_tuple], [ x[0] for x in gana_tuple]]
+    headers = [x for x in range(0, len(gana_tuple))]
+    return tabulate(table, headers, tablefmt="html")
