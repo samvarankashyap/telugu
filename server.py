@@ -26,7 +26,6 @@ def get_html():
     html = call_for_data()
     return html
 
-
 ip = os.getenv("IP", "0.0.0.0")
 port = int(os.getenv("PORT", 80))
 

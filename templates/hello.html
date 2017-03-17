@@ -32,6 +32,9 @@ $(document).ready(function() {
                      console.log("Data: " + data + "\nStatus: " + status);
                      $("#content").html(data);
                 });
+                $.post( "/postdata", { name: "John", time: "2pm" } ).done(function( data ) {
+    alert( "Data Loaded: " + data );
+  });
            });
 
 });
