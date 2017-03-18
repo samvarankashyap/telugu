@@ -29,8 +29,20 @@ $(document).ready(function() {
 	   });
            $("#content_btn").click(function(){
                 $.get("/gethtml", function(data, status){
+                     data = JSON.parse(data);
+                     console.log(data);
                      console.log("Data: " + data + "\nStatus: " + status);
+                     if (data.constructor === Array){
+                         html = "";
+                         for(i in data){
+                         html += data[i];
+                         html += "<br>";
+                         }
+                         $("#content").html(html);
+                     }
+                     else{
                      $("#content").html(data);
+                     }
                 });
                 $.post( "/postdata", { name: "John", time: "2pm" } ).done(function( data ) {
     alert( "Data Loaded: " + data );

@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask
 from flask import render_template
 from flask import Flask, request, send_from_directory
@@ -23,8 +24,8 @@ def index():
 
 @app.route('/gethtml')
 def get_html():
-    html = call_for_data()
-    return html
+    html = call_for_data(True,True)
+    return json.dumps(html)
 
 ip = os.getenv("IP", "0.0.0.0")
 port = int(os.getenv("PORT", 80))
