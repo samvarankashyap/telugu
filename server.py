@@ -22,10 +22,17 @@ def send_css(path):
 def index():
     return render_template('hello.html')
 
-@app.route('/gethtml')
+@app.route('/gethtml' ,methods = ['GET', 'POST'])
 def get_html():
-    html = call_for_data(True,True)
-    return json.dumps(html)
+    if request.method == "GET":
+        html = call_for_data(True,True)
+        return json.dumps(html)
+    if request.method == "POST":
+        if request.form["gana_format"] == "linewise":
+            html = call_for_data(True,True)
+        else:
+            html = call_for_data(True,False)
+        return json.dumps(html)
 
 ip = os.getenv("IP", "0.0.0.0")
 port = int(os.getenv("PORT", 80))

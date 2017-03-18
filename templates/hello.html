@@ -28,6 +28,7 @@ $(document).ready(function() {
 		$("#"+tab_id).addClass('current');
 	   });
            $("#content_btn").click(function(){
+                /*
                 $.get("/gethtml", function(data, status){
                      data = JSON.parse(data);
                      console.log(data);
@@ -43,10 +44,27 @@ $(document).ready(function() {
                      else{
                      $("#content").html(data);
                      }
+                });*/
+                var post_dict = {}
+                post_dict["gana_format"] = $("#gana_format").val()
+                $.post( "/gethtml", post_dict ).done(function( data ) {
+                   //  alert( "Data Loaded: " + data );
+                     data = JSON.parse(data);
+                     console.log(data);
+                     console.log("Data: " + data + "\nStatus: " + status);
+                     if (data.constructor === Array){
+                         html = "";
+                         for(i in data){
+                         html += data[i];
+                         html += "<br>";
+                         }
+                         $("#content").html(html);
+                     }
+                     else{
+                     $("#content").html(data);
+                     }
+                     
                 });
-                $.post( "/postdata", { name: "John", time: "2pm" } ).done(function( data ) {
-    alert( "Data Loaded: " + data );
-  });
            });
 
 });
@@ -152,7 +170,13 @@ $(document).ready(function() {
 	</ul>
 
 	<div id="tab-1" class="tab-content current">
-        This is tab1
+        <div class="form-group">
+            <label for="gana_format">Select format:</label>
+            <select class="form-control" id="gana_format">
+                <option value='singlestring'>Single String</option>
+                <option value='linewise'>Line Wise</option>
+            </select>
+        </div>
         <input type="button" id="content_btn" class="btn" value="Click Me">
         <div id="content">
         </div>

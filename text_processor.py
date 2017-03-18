@@ -75,8 +75,8 @@ def call_for_data(filename=None, linewise=False):
     indexes = [i for i,x in enumerate(gana_tuple) if x == ('\n','\n')]
 
     print indexes
-    gana_tuple.append(('\n','\n'))
     if linewise:
+        gana_tuple.append(('\n','\n'))
         htmls = []
         g_t = []
         for elem in gana_tuple:
@@ -94,5 +94,3 @@ def call_for_data(filename=None, linewise=False):
         table = [[ x[1] for x in gana_tuple], [ x[0] for x in gana_tuple]]
         headers = [x for x in range(0, len(gana_tuple))]
         return tabulate(table, headers, tablefmt="html")
-
-
